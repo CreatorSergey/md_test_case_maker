@@ -1,4 +1,11 @@
 <div class="card">
-  <h2>Card component</h2>
-  <p>Angular Основы. Полный Курс для начинающих</p>
+  <h2>{{ title }}</h2>
+  <p> {{ text }}</p>
+  <strong> {{ number}} </strong>
+  <em> {{ array }}</em>
+  <pre> {{ obj | json }} </pre>
+  <p> {{ getInfo() }} </p>
+  <img src="{{ imageUrl }}">
+  <img [src]="imageUrl">
+  <button [disabled]="disabled">Enable</button>
 </div>
