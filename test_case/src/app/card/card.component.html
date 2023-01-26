@@ -1,21 +1,21 @@
 <div class="card">
   <h2 [ngStyle]="{
-    color: (title.length < 5 ? 'black' : 'green'),
-    'font-size': (title.length < 7 ? '12px' : '25px')
-  }">{{ title }}</h2>
+    color: (card.title.length < 5 ? 'black' : 'green'),
+    'font-size': (card.title.length < 7 ? '12px' : '25px')
+  }">{{ card.title }}</h2>
 
   <p class="text" [ngClass]="{
     blue: textColor === 'blue',
     green: textColor === 'green',
     red: textColor === 'red'
-  }"> {{ text }}</p>
+  }"> {{ index }} {{ card.text }}</p>
 
 
   <p class="text"
     [class.blue] = "textColor === 'blue'"
     [class.red] = "textColor === 'red'"
     [class.green] = "textColor === 'green'"
-  > {{ text }}</p>
+  > {{ card.text }}</p>
 
   <strong> {{ number}} </strong>
   <em> {{ array }}</em>
@@ -33,19 +33,25 @@
 
   <div class="buttons">
     <button (click)="changeTitle()" >Change title</button>
-    <button (click)="title='inline title'" >Change title inline</button>
+    <button (click)="card.title='inline title'" >Change title inline</button>
   </div>
   <div>
     <!-- связывание по обработчику -->
-    <input type="text" (input)="inputHandler($event)" [value]="title">
+    <input type="text" (input)="inputHandler($event)" [value]="card.title">
 
     <!-- связывание по обработчику с передачей своего значения -->
-    <input type="text" #myInput (input)="inputHandler2(myInput.value)" [value]="title">
+    <input type="text" #myInput (input)="inputHandler2(myInput.value)" [value]="card.title">
   </div>
 
   <!-- связывание поля и переменной через модель -->
   <div>
-    <input type="text" [(ngModel)]="title" (ngModelChange)="changeHandler()">
+    <input type="text" [(ngModel)]="card.title" (ngModelChange)="changeHandler()">
+  </div>
+
+  <div>
+    <strong>
+      {{ cardDate | date:'dd MMMM yyyy HH:mm':undefined:'ru' }}
+    </strong>
   </div>
 
 </div>

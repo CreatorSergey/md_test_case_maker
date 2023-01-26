@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, Input} from '@angular/core'
+import { Card } from '../app.component'
 
 @Component({
   selector: 'app-card',
@@ -7,8 +8,12 @@ import {Component, OnInit} from '@angular/core'
   interpolation: ['{{', '}}']
 })
 export class CardComponent implements OnInit {
-  title: string = "My Card Title"
-  text: string = "My Sample Text"
+
+  @Input() card!: Card
+  @Input() index!: number
+
+  cardDate: Date = new Date()
+
   number = 42
   array = [1, 1, 2, 3, 5, 8, 13]
   obj = {name: "Vladilen", info: {age:25}}
@@ -22,21 +27,21 @@ export class CardComponent implements OnInit {
   }
 
   changeTitle() {
-    this.title = "hahaha";
+    this.card.title = "hahaha";
   }
 
   inputHandler(event: any) {
     console.log(event);
-    this.title = event.target.value;
+    this.card.title = event.target.value;
   }
 
   inputHandler2(value: string) {
     console.log(value);
-    this.title = value;
+    this.card.title = value;
   }
 
   changeHandler() {
-    console.log("changeHandler: " + this.title)
+    console.log("changeHandler: " + this.card.title)
   }
 
   ngOnInit() {

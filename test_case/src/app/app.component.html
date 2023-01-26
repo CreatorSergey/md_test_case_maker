@@ -8,9 +8,13 @@
 <div *ngIf="toggle; else noCards">
   <app-test></app-test>
   <app-form></app-form>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
+  <app-card *ngFor="
+    let iterCard of cards;
+    let idx = index"
+
+    [card]="iterCard"
+    [index]="idx + 1"
+  ></app-card>
 </div>
 
 <ng-template #noCards>
