@@ -1,10 +1,19 @@
 <div class="container">
   <h1>Hello</h1>
 
+  <br>
+  <button (click)="toggleCards()">Toggle Cards</button>
+  <hr>
+
+<div *ngIf="toggle; else noCards">
+  <app-test></app-test>
+  <app-form></app-form>
+  <app-card></app-card>
+  <app-card></app-card>
+  <app-card></app-card>
 </div>
 
-<app-test></app-test>
-<app-form></app-form>
-<app-card></app-card>
-<app-card></app-card>
-<app-card></app-card>
+<ng-template #noCards>
+  <p>Cars are Hidden!</p>
+</ng-template>
+</div>

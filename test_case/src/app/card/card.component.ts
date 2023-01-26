@@ -13,10 +13,30 @@ export class CardComponent implements OnInit {
   array = [1, 1, 2, 3, 5, 8, 13]
   obj = {name: "Vladilen", info: {age:25}}
 
+  textColor: string = ""
+
   disabled = false
 
   getInfo(): string {
     return "This is my info"
+  }
+
+  changeTitle() {
+    this.title = "hahaha";
+  }
+
+  inputHandler(event: any) {
+    console.log(event);
+    this.title = event.target.value;
+  }
+
+  inputHandler2(value: string) {
+    console.log(value);
+    this.title = value;
+  }
+
+  changeHandler() {
+    console.log("changeHandler: " + this.title)
   }
 
   ngOnInit() {
