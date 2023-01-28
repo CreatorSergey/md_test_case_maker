@@ -1,0 +1,52 @@
+<div class="example-form">
+  <h2>Новый тест кейс</h2>
+  <button mat-button class="save-button" (click)="save()">Сохранить</button>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Название</mat-label>
+    <textarea
+      matInput
+      placeholder="Введите название тест кейса"
+      (input)="inputNameHandler($event)"
+      [value]="name"
+    ></textarea>
+  </mat-form-field>
+
+  <h2>Влияние</h2>
+
+  <mat-form-field class="product-select">
+    <mat-label>Выберите продукт</mat-label>
+    <mat-select [(value)]="product">
+      <mat-option *ngFor="let it of products" [value]="it">
+        {{ it }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="component-select">
+    <mat-label>Выберите компонент</mat-label>
+    <mat-select [(value)]="component">
+      <mat-option *ngFor="let it of components" [value]="it">
+        {{ it }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="priority-select">
+    <mat-label>Выберите приоритет</mat-label>
+    <mat-select [(value)]="priority">
+      <mat-option *ngFor="let it of priorities" [value]="it">
+        {{ it }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Ссылка на задачу</mat-label>
+    <input matInput placeholder="https ссылка" value="" />
+  </mat-form-field>
+
+  <h2>Подготовка</h2>
+  <h2>Шаги</h2>
+  <h2>Ожидаемый результат</h2>
+</div>
