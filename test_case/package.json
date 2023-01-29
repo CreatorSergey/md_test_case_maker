@@ -23,6 +23,7 @@
     "@material/theme": "^15.0.0-canary.684e33d25.0",
     "@types/mustache": "^4.2.2",
     "file-saver": "^2.0.5",
+    "material-design-icons": "^3.0.1",
     "mustache": "^4.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

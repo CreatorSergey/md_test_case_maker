@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -40,6 +41,7 @@ registerLocaleData(localRu, 'ru');
     MatFormFieldModule,
     MatTreeModule,
     MatSelectModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

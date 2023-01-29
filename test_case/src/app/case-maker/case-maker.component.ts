@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 import { saveAs } from 'file-saver';
 import mustache from 'mustache';
@@ -13,14 +19,27 @@ export class CaseMakerComponent {
   components: string[] = ['None', 'Редактор комнат', 'Welcome'];
   priorities: string[] = ['Низкий', 'Обычный', 'Важный'];
 
-  product: string = this.products[0];
+  product: string = this.products[1];
   component: string = this.components[0];
-  priority: string = this.priorities[0];
+  priority: string = this.priorities[1];
   name = '';
 
   inputNameHandler(event: any) {
     console.log(event);
     this.name = event.target.value;
+  }
+
+  limitLines(event: Event, maxLines: number) {
+    let textarea = event.target as any;
+    let maxRows: number = maxLines;
+
+    let newContent: string = (textarea.value as string)
+      .split('\n')
+      .filter((val, row) => row < maxRows)
+      .join('\n');
+
+    textarea.value = newContent;
+    this.name = newContent;
   }
 
   save(): void {

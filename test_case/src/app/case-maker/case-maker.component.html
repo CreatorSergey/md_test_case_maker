@@ -1,6 +1,19 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Icons"
+  rel="stylesheet"
+/>
 <div class="example-form">
-  <h2>Новый тест кейс</h2>
-  <button mat-button class="save-button" (click)="save()">Сохранить</button>
+  <h2>Новый тест-кейс</h2>
+  <button
+    mat-button
+    color="primary"
+    class="save-button"
+    (click)="save()"
+    [disabled]="!name_input.valid"
+  >
+    <mat-icon>save</mat-icon>
+    Сохранить
+  </button>
 
   <mat-form-field class="example-full-width">
     <mat-label>Название</mat-label>
@@ -8,8 +21,32 @@
       matInput
       placeholder="Введите название тест кейса"
       (input)="inputNameHandler($event)"
-      [value]="name"
+      spellcheck="true"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="8"
+      required
+      maxlength="100"
+      minlength="1"
+      maxRows="5"
+      [(ngModel)]="name"
+      #name_input="ngModel"
+      (input)="limitLines($event, 5)"
     ></textarea>
+    <button
+      *ngIf="name"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="name = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ name.length }} / 100</mat-hint>
+
+    <div *ngIf="name_input.invalid && (name_input.dirty || name_input.touched)">
+      <div *ngIf="name_input.errors?.['required']"></div>
+    </div>
   </mat-form-field>
 
   <h2>Влияние</h2>
