@@ -20,6 +20,10 @@ import { CardComponent } from './card/card.component';
 import { FormComponent } from './form/form.component';
 import { TestComponent } from './test/test.component';
 import { CaseMakerComponent } from './case-maker/case-maker.component';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+} from '@angular/material/core';
 
 registerLocaleData(localRu, 'ru');
 
@@ -45,7 +49,9 @@ registerLocaleData(localRu, 'ru');
     MatIconModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

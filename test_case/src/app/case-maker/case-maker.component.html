@@ -9,13 +9,13 @@
     color="primary"
     class="save-button"
     (click)="save()"
-    [disabled]="!name_input.valid"
+    [disabled]="!myForm.valid"
   >
     <mat-icon>save</mat-icon>
     Сохранить
   </button>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field [formGroup]="myForm" class="example-full-width">
     <mat-label>Название</mat-label>
     <textarea
       matInput
@@ -25,13 +25,12 @@
       cdkTextareaAutosize
       cdkAutosizeMinRows="1"
       cdkAutosizeMaxRows="8"
-      required
       maxlength="100"
       minlength="1"
       maxRows="5"
-      [(ngModel)]="name"
-      #name_input="ngModel"
       (input)="limitLines($event, 5)"
+      formControlName="name_field"
+      required
     ></textarea>
     <button
       *ngIf="name"
@@ -43,9 +42,14 @@
       <mat-icon>close</mat-icon>
     </button>
     <mat-hint align="end">{{ name.length }} / 100</mat-hint>
+    <div *ngIf="myForm.invalid && (myForm.dirty || myForm.touched)">
+      <div align="start" *ngIf="myForm.errors?.['isInvalid']">
+        <div class="error_label">Имя должно состоять из букв и цифр</div>
+      </div>
 
-    <div *ngIf="name_input.invalid && (name_input.dirty || name_input.touched)">
-      <div *ngIf="name_input.errors?.['required']"></div>
+      <div align="start" *ngIf="myForm.errors?.['isEmpty']">
+        <div class="error_label">Имя не может быть пустым</div>
+      </div>
     </div>
   </mat-form-field>
 
