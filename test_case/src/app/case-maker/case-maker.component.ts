@@ -28,6 +28,9 @@ export class CaseMakerComponent {
   name = '';
   myForm!: FormGroup;
 
+  prepare_count = 34;
+  steps_count = 23;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {

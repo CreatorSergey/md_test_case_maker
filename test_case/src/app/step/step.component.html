@@ -1,0 +1,16 @@
+<div class="new-step">
+  <mat-label class="step-label">Шаг {{ _step_index }}</mat-label>
+  <mat-form-field class="step-input">
+    <input type="search" matInput placeholder="Введите следующий шаг" value="" autocomplete="nope"/>
+  </mat-form-field>
+ <br>
+  <mat-divider [vertical]="true" class="mat-divider.mat-divider-vertical.new"></mat-divider>
+  <mat-form-field class="expected-step">
+    <input type="search" matInput placeholder="Введите промежуточный результат" value="" autocomplete="nope"/>
+  </mat-form-field>
+  <br>
+  <mat-toolbar class="toolbar">
+    <span class="example-spacer"></span>
+    <button mat-button color="primary" class="add-button" fxLayoutAlign="flex-end center">Добавить</button>
+</mat-toolbar>
+</div>

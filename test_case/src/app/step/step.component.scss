@@ -1,0 +1,48 @@
+.new-step {
+  padding: 0.5rem 1rem;
+  border: 3px dashed #ccc;
+  margin-bottom: 1rem;
+}
+
+.mat-divider.mat-divider-vertical {
+  height: 55px;
+  /* Center vertically */
+  margin-left: 3rem; 
+  margin-right: 0.5rem;
+  float: left;
+  border-right-color: gray; 
+  border-right-width: 3px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.expected-step {
+  width: 86%;
+  color: gray;
+}
+
+.step-input {
+  margin-left: 1rem; 
+  width: 86%;
+}
+
+.step-label {
+  color: gray;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.add-button {
+
+}
+
+.toolbar {
+  padding: 0;
+  margin:  0;
+  background-color:transparent;
+  height: 2.1rem;
+}

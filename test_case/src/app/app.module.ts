@@ -14,6 +14,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider'
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -24,6 +26,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
+import { StepComponent } from './step/step.component';
 
 registerLocaleData(localRu, 'ru');
 
@@ -34,6 +37,7 @@ registerLocaleData(localRu, 'ru');
     FormComponent,
     TestComponent,
     CaseMakerComponent,
+    StepComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,8 @@ registerLocaleData(localRu, 'ru');
     MatSelectModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatDividerModule,
+    MatToolbarModule
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
