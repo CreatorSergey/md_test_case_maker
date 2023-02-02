@@ -85,6 +85,11 @@ export class CaseMakerComponent {
     this.prepare_steps.push(step);
   }
 
+  onDeletEvent(index: number) {
+    console.log("onDeletEvent");
+    this.prepare_steps.splice(index, 1); 
+  }
+
   save(): void {
     const output = mustache.render(
       '# {{name}}\r\n' +

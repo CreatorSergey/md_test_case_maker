@@ -2,11 +2,14 @@
   <div class="content">
     <div class="step-label">Шаг {{ index }}</div>
     <div class="step-text">{{step.text}}</div>
+    <button (click)="callParent()" class="step-delete" mat-icon-button aria-label="Удалить">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
   <br>
   <div class="content">
   <mat-divider [vertical]="true" class="mat-divider.mat-divider-vertical.new"></mat-divider>
   <mat-label class="step-expected">{{step.expected}}</mat-label>
-</div>
+  </div>
   <br>
 </div>
