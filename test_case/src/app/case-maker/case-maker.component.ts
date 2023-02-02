@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Step } from '../interface-step';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,12 +12,12 @@ import {
 
 import { saveAs } from 'file-saver';
 import mustache from 'mustache';
-
 @Component({
   selector: 'app-case-maker',
   templateUrl: './case-maker.component.html',
   styleUrls: ['./case-maker.component.scss'],
 })
+
 export class CaseMakerComponent {
   products: string[] = ['None', 'Bus77', 'i3 Pro', 'i3 Knx'];
   components: string[] = ['None', 'Редактор комнат', 'Welcome'];
@@ -28,8 +29,12 @@ export class CaseMakerComponent {
   name = '';
   myForm!: FormGroup;
 
-  prepare_count = 34;
   steps_count = 23;
+
+  prepare_steps: Step[] = [
+    {text: "Создан серверный проект, в который добавлена линия с устройтсвом, имеющим диод", expected: "To upload SVGs for hosting or sharing. Using this feature, you can reference SVGs in your HTML and easily change your icon selection on the fly, without having to update your CSS."},
+    {text: "Пользователь находится на вкладке Правила настроек проекта", expected: "This is card number 2"},
+  ]
 
   constructor(private fb: FormBuilder) {}
 
@@ -73,6 +78,11 @@ export class CaseMakerComponent {
 
     textarea.value = newContent;
     this.name = newContent;
+  }
+
+  getNotification(step: Step) {
+    console.log(step);
+    this.prepare_steps.push(step);
   }
 
   save(): void {

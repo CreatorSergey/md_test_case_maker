@@ -27,6 +27,7 @@ import {
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
 import { StepComponent } from './step/step.component';
+import { StepViewComponent } from './step-view/step-view.component';
 
 registerLocaleData(localRu, 'ru');
 
@@ -38,6 +39,7 @@ registerLocaleData(localRu, 'ru');
     TestComponent,
     CaseMakerComponent,
     StepComponent,
+    StepViewComponent,
   ],
   imports: [
     BrowserModule,

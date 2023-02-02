@@ -53,7 +53,7 @@
     </div>
   </mat-form-field>
 
-  <h2>Влияние</h2>
+  <h2>Влияние:</h2>
 
   <mat-form-field class="product-select">
     <mat-label>Выберите продукт</mat-label>
@@ -87,9 +87,16 @@
     <input matInput placeholder="https ссылка" value="" />
   </mat-form-field>
 
-  <h2>Подготовка</h2>
-    <app-step [step_index]="prepare_count"/>
-  <h2>Шаги</h2>
+  <h2>Подготовка:</h2>
+    <app-step-view *ngFor="
+      let iterCard of prepare_steps;
+      let idx = index"
+
+      [step]="iterCard"
+      [index]="idx + 1"
+    ></app-step-view>
+    <app-step (someEvent)='getNotification($event)' [step_index]="prepare_steps.length + 1"/>
+  <h2>Шаги:</h2>
     <app-step [step_index]="steps_count"/>
-  <h2>Ожидаемый результат</h2>
+  <h2>Ожидаемый результат:</h2>
 </div>

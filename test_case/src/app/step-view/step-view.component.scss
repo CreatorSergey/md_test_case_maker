@@ -1,0 +1,66 @@
+.new-step {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.mat-divider.mat-divider-vertical {
+
+  /* Center vertically */
+  margin-left: 5.8rem; 
+  margin-right: 0.5rem;
+  float: left;
+  border-right-color: rgb(0, 110, 255); 
+  border-right-width: 3px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.step-expected {
+  color: gray;
+  font-size: 14pt;
+
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.expected-step {
+  width: 86%;
+  color: gray;
+}
+
+.content {
+  width: 100%;
+  display: flex; 
+}
+
+.step-input {
+  margin-left: 1rem; 
+  width: 86%;
+}
+
+.step-label {
+  color: black;
+  font-size: 16pt;
+  font-weight: bold;
+  width: 15%;
+  margin: 0;
+}
+
+.step-text {
+  color: black;
+  font-size: 14pt;
+  margin-left: 0.1rem;
+  width: 80%;
+}
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.add-button {
+
+}
