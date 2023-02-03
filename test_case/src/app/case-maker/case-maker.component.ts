@@ -27,6 +27,7 @@ export class CaseMakerComponent {
   component: string = this.components[0];
   priority: string = this.priorities[1];
   name = '';
+  final_expected = '';
   myForm!: FormGroup;
 
   _togglePrepare = true
@@ -90,6 +91,11 @@ export class CaseMakerComponent {
   inputNameHandler(event: any) {
     console.log(event);
     this.name = event.target.value;
+  }
+
+  inputFinalExpecteHandler(event: any) {
+    console.log(event);
+    this.final_expected = event.target.value;
   }
 
   limitLines(event: Event, maxLines: number) {
