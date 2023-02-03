@@ -12,7 +12,8 @@ export class StepComponent implements OnInit  {
 
  new_step: Step  = {
   text: "",
-  expected: ""
+  expected: "",
+  id: 0
  };
 
  inputTextHandler(event: any) {
@@ -36,7 +37,10 @@ inputExpectedHandler(event: any) {
   }
 
   callParent(): void {
-    this.someEvent.emit({text: this.new_step.text, expected: this.new_step.expected});
+    const current = new Date();
+    const timestamp = current.getTime();
+
+    this.someEvent.emit({text: this.new_step.text, expected: this.new_step.expected, id: timestamp});
     console.log("callParent")
     this.new_step.text = "";
     this.new_step.expected = "";

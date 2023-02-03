@@ -5,6 +5,25 @@
   margin: auto;
 }
 
+.page-header {
+
+}
+
+.none-header {
+  color: gray;
+  text-align: center;
+}
+
+.display-child-element {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.display-child-element {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .example-full-width {
   width: 100%;
 }
@@ -35,4 +54,14 @@
 .error_label {
   color: #f44336;
   font-size: smaller;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

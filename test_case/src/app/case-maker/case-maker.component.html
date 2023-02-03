@@ -86,8 +86,20 @@
     <mat-label>Ссылка на задачу</mat-label>
     <input matInput placeholder="https ссылка" value="" />
   </mat-form-field>
+  <header class="page-header">
+    <button class="display-child-element" (click)="togglePrepare()" mat-icon-button aria-label="Свернуть">
+      <mat-icon>{{ _togglePrepare == true ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+    </button>
+    <h2 class="display-child-element" >Подготовка:</h2>
 
-  <h2>Подготовка:</h2>
+    <button class="display-child-element" (click)="toogleNewPrepare()" mat-icon-button aria-label="Редактировать">
+      <mat-icon>create icon</mat-icon>
+    </button>
+  </header>
+  <div class="none-header" *ngIf="prepare_steps.length == 0 && _toggleNewPrepare == false">
+    <p>Подготовки нет</p>
+  </div>
+  <div *ngIf="_togglePrepare">
     <app-step-view (deleteEvent)='onDeletEvent($event)' *ngFor="
       let iterCard of prepare_steps;
       let idx = index"
@@ -95,8 +107,36 @@
       [step]="iterCard"
       [index]="idx + 1"
     ></app-step-view>
+    <div *ngIf="_toggleNewPrepare">
     <app-step (someEvent)='getNotification($event)' [step_index]="prepare_steps.length + 1"/>
-  <h2>Шаги:</h2>
-    <app-step [step_index]="steps_count"/>
+    </div>
+  </div>
+  <header class="page-header">
+    <button class="display-child-element" (click)="toggleSteps()" mat-icon-button aria-label="Свернуть">
+      <mat-icon>{{ _toggleSteps == true ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+    </button>
+    <h2 class="display-child-element">Шаги:</h2>
+
+
+    <button class="display-child-element" (click)="toogleNewStep()" mat-icon-button aria-label="Редактировать">
+      <mat-icon>create icon</mat-icon>
+    </button>
+
+  </header>
+  <div *ngIf="_toggleSteps">
+  <div class="none-header" *ngIf="steps.length == 0 && _toggleNewSteps == false">
+    <p>Шагов нет</p>
+  </div>
+  <app-step-view (deleteEvent)='onDeletStepEvent($event)' *ngFor="
+    let iterCard of steps;
+    let idx = index"
+
+    [step]="iterCard"
+    [index]="idx + 1"
+    ></app-step-view>
+    <div *ngIf="_toggleNewSteps">
+      <app-step (someEvent)='onCreateStep($event)' [step_index]="steps.length + 1"/>
+    </div>
+  </div>
   <h2>Ожидаемый результат:</h2>
 </div>

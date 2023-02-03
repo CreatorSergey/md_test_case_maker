@@ -17,6 +17,6 @@ export class StepViewComponent implements OnInit {
 
   callParent(): void {
     console.log("callParent");
-    this.deleteEvent.emit(this.index);
+    this.deleteEvent.emit(this.step.id);
   }
 }

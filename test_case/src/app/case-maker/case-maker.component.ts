@@ -29,11 +29,36 @@ export class CaseMakerComponent {
   name = '';
   myForm!: FormGroup;
 
-  steps_count = 23;
+  _togglePrepare = true
+  _toggleSteps = true
+
+  _toggleNewPrepare = false
+  _toggleNewSteps = false
+
+  steps: Step[] = [
+  ]
+
+  togglePrepare() {
+    console.log("togglePrepare")
+    this._togglePrepare = !this._togglePrepare;
+  }
+
+  toggleSteps() {
+    console.log("toggleSteps")
+    this._toggleSteps = !this._toggleSteps;
+  }
+
+  toogleNewStep() {
+    console.log("_toggleNewSteps")
+    this._toggleNewSteps = !this._toggleNewSteps;
+  }
+
+  toogleNewPrepare() {
+    console.log("_toggleNewPrepare")
+    this._toggleNewPrepare = !this._toggleNewPrepare;
+  }
 
   prepare_steps: Step[] = [
-    {text: "Создан серверный проект, в который добавлена линия с устройтсвом, имеющим диод", expected: "To upload SVGs for hosting or sharing. Using this feature, you can reference SVGs in your HTML and easily change your icon selection on the fly, without having to update your CSS."},
-    {text: "Пользователь находится на вкладке Правила настроек проекта", expected: "This is card number 2"},
   ]
 
   constructor(private fb: FormBuilder) {}
@@ -85,9 +110,35 @@ export class CaseMakerComponent {
     this.prepare_steps.push(step);
   }
 
-  onDeletEvent(index: number) {
+  onCreateStep(step: Step) {
+    console.log(step);
+    this.steps.push(step);
+  }
+
+  onDeletEvent(id: number) {
     console.log("onDeletEvent");
-    this.prepare_steps.splice(index, 1); 
+
+    for(let i = 0; i < this.prepare_steps.length; i++) {
+      let step = this.prepare_steps[i];
+      if(step.id == id)
+      {
+        this.prepare_steps.splice(i, 1); 
+        break;
+      }
+    }
+  }
+
+  onDeletStepEvent(id: number) {
+    console.log("onDeletStepEvent");
+
+    for(let i = 0; i < this.steps.length; i++) {
+      let step = this.steps[i];
+      if(step.id == id)
+      {
+        this.steps.splice(i, 1); 
+        break;
+      }
+    } 
   }
 
   save(): void {
