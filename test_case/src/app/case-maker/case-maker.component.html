@@ -96,10 +96,11 @@
       <mat-icon>create icon</mat-icon>
     </button>
   </header>
-  <div class="none-header" *ngIf="prepare_steps.length == 0 && _toggleNewPrepare == false">
-    <p>Подготовки нет</p>
-  </div>
+
   <div *ngIf="_togglePrepare">
+    <div class="none-header" *ngIf="prepare_steps.length == 0 && _toggleNewPrepare == false">
+      <p>Подготовки нет</p>
+    </div>
     <app-step-view (deleteEvent)='onDeletEvent($event)' *ngFor="
       let iterCard of prepare_steps;
       let idx = index"
