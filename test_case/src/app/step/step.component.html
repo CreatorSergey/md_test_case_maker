@@ -1,18 +1,25 @@
 <div class="new-step">
-  <mat-label class="step-label">Шаг {{ _step_index }}</mat-label>
-  <quill-editor class="editor-container" placeholder="Введите следующий шаг">
-  </quill-editor>
-
-  <br />
-  <mat-divider
-    [vertical]="true"
-    class="mat-divider.mat-divider-vertical.new"
-  ></mat-divider>
-  <quill-editor
-    class="editor-container"
-    placeholder="Введите промежуточный результат"
-  >
-  </quill-editor>
+  <div>
+    <mat-label class="step-label">Шаг {{ _step_index }}.</mat-label>
+    <quill-editor
+      class="editor-container"
+      [(ngModel)]="new_step.text"
+      placeholder="Введите следующий шаг"
+    >
+    </quill-editor>
+  </div>
+  <div class="parent">
+    <mat-divider
+      [vertical]="true"
+      class="mat-divider.mat-divider-vertical.new"
+    ></mat-divider>
+    <quill-editor
+      [(ngModel)]="new_step.expected"
+      class="editor-container-expected"
+      placeholder="Введите промежуточный результат"
+    >
+    </quill-editor>
+  </div>
   <br />
   <mat-toolbar class="toolbar">
     <span class="example-spacer"></span>

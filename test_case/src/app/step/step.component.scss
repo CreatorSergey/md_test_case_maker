@@ -2,16 +2,40 @@
   padding: 0.5rem 1rem;
   border: 3px dashed #ccc;
   margin-bottom: 1rem;
+  display: grid;
+}
+
+.step-label {
+  color: gray;
+  margin-right: 1rem;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.editor-container {
+  width: 90%;
+}
+
+.parent {
+  display: inline-block;
+}
+.editor-container-expected {
+  width: 85%;
+  vertical-align: middle;
 }
 
 .mat-divider.mat-divider-vertical {
-  height: 55px;
+  height: 100%;
+  width: 4px !important;
+  position: inherit !important;
   /* Center vertically */
-  margin-left: 3rem; 
+  margin-left: 6rem;
   margin-right: 0.5rem;
   float: left;
-  border-right-color: gray; 
+  border-right-color: gray;
   border-right-width: 3px;
+  vertical-align: middle;
 }
 
 .example-full-width {
@@ -24,12 +48,8 @@
 }
 
 .step-input {
-  margin-left: 1rem; 
+  margin-left: 1rem;
   width: 86%;
-}
-
-.step-label {
-  color: gray;
 }
 
 .example-spacer {
@@ -37,12 +57,11 @@
 }
 
 .add-button {
-
 }
 
 .toolbar {
   padding: 0;
-  margin:  0;
-  background-color:transparent;
+  margin: 0;
+  background-color: transparent;
   height: 2.1rem;
 }
