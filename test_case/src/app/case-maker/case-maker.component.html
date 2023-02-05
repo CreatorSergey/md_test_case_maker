@@ -140,27 +140,17 @@
     </div>
   </div>
   <h2>Ожидаемый результат:</h2>
-  <mat-form-field class="example-full-width">
-    <mat-label>Ожидаемый результат</mat-label>
-    <textarea
-      matInput
-      placeholder="Введите Ожидаемый результат"
-      (input)="inputFinalExpecteHandler($event)"
-      spellcheck="true"
-      cdkTextareaAutosize
-      cdkAutosizeMinRows="1"
-      maxlength="100"
-      minlength="1"
-      [(ngModel)] = "final_expected"
-    ></textarea>
-    <button
-      *ngIf="final_expected"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="final_expected = ''"
+  <div [formGroup]="form">
+    <quill-editor class="editor-container"
+    [(ngModel)]="editorContent"
+    placeholder="Введите ожидаемый результат"
+    formControlName="text"
+
+    (onBlur)="blur()"
+    (onSelectionChanged)="onSelectionChanged()"
+    (onContentChanged)="onContentChanged($event)"
+    (onEditorChanged)="changedEditor($event)"
     >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+    </quill-editor>
+  </div>
 </div>

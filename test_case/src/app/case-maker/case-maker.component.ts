@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Step } from '../interface-step';
+
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -12,12 +14,16 @@ import {
 
 import { saveAs } from 'file-saver';
 import mustache from 'mustache';
+import {
+  ContentChange,
+  EditorChangeContent,
+  EditorChangeSelection,
+} from 'ngx-quill';
 @Component({
   selector: 'app-case-maker',
   templateUrl: './case-maker.component.html',
   styleUrls: ['./case-maker.component.scss'],
 })
-
 export class CaseMakerComponent {
   products: string[] = ['None', 'Bus77', 'i3 Pro', 'i3 Knx'];
   components: string[] = ['None', 'Редактор комнат', 'Welcome'];
@@ -30,37 +36,35 @@ export class CaseMakerComponent {
   final_expected = '';
   myForm!: FormGroup;
 
-  _togglePrepare = true
-  _toggleSteps = true
+  _togglePrepare = true;
+  _toggleSteps = true;
 
-  _toggleNewPrepare = false
-  _toggleNewSteps = false
+  _toggleNewPrepare = false;
+  _toggleNewSteps = false;
 
-  steps: Step[] = [
-  ]
+  steps: Step[] = [];
 
   togglePrepare() {
-    console.log("togglePrepare")
+    console.log('togglePrepare');
     this._togglePrepare = !this._togglePrepare;
   }
 
   toggleSteps() {
-    console.log("toggleSteps")
+    console.log('toggleSteps');
     this._toggleSteps = !this._toggleSteps;
   }
 
   toogleNewStep() {
-    console.log("_toggleNewSteps")
+    console.log('_toggleNewSteps');
     this._toggleNewSteps = !this._toggleNewSteps;
   }
 
   toogleNewPrepare() {
-    console.log("_toggleNewPrepare")
+    console.log('_toggleNewPrepare');
     this._toggleNewPrepare = !this._toggleNewPrepare;
   }
 
-  prepare_steps: Step[] = [
-  ]
+  prepare_steps: Step[] = [];
 
   constructor(private fb: FormBuilder) {}
 
@@ -73,6 +77,14 @@ export class CaseMakerComponent {
         validators: this.checkValue(),
       }
     );
+
+    this.form = new FormGroup({
+      text: new FormControl('<p><strong>Hello</strong></p>'),
+    });
+
+    this.form.valueChanges.subscribe((data) => {
+      console.log('Changed Values', data);
+    });
   }
 
   private checkValue(): ValidatorFn {
@@ -122,32 +134,32 @@ export class CaseMakerComponent {
   }
 
   onDeletEvent(id: number) {
-    console.log("onDeletEvent");
+    console.log('onDeletEvent');
 
-    for(let i = 0; i < this.prepare_steps.length; i++) {
+    for (let i = 0; i < this.prepare_steps.length; i++) {
       let step = this.prepare_steps[i];
-      if(step.id == id)
-      {
-        this.prepare_steps.splice(i, 1); 
+      if (step.id == id) {
+        this.prepare_steps.splice(i, 1);
         break;
       }
     }
   }
 
   onDeletStepEvent(id: number) {
-    console.log("onDeletStepEvent");
+    console.log('onDeletStepEvent');
 
-    for(let i = 0; i < this.steps.length; i++) {
+    for (let i = 0; i < this.steps.length; i++) {
       let step = this.steps[i];
-      if(step.id == id)
-      {
-        this.steps.splice(i, 1); 
+      if (step.id == id) {
+        this.steps.splice(i, 1);
         break;
       }
-    } 
+    }
   }
 
   save(): void {
+    console.log(this.editorContent);
+
     const output = mustache.render(
       '# {{name}}\r\n' +
         '## Продукт: {{ product }} \r\n' +
@@ -160,5 +172,27 @@ export class CaseMakerComponent {
       type: 'text/plain;charset=utf-8',
     });
     saveAs(file);
+  }
+
+  form!: FormGroup;
+  html!: string;
+  editorContent = ``;
+  public blur(): void {
+    console.log('blur');
+  }
+
+  public onSelectionChanged(): void {
+    console.log('onSelectionChanged');
+  }
+
+  public onContentChanged(data: ContentChange): void {
+    console.log('onSelectionChanged');
+    console.log(data);
+  }
+
+  public changedEditor(
+    event: EditorChangeContent | EditorChangeSelection
+  ): void {
+    console.log('editor-change', event);
   }
 }

@@ -19,3 +19,7 @@
 
 7. иконки
    https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/
+
+8. https://stackoverflow.com/questions/65616025/error-when-trying-to-implement-quill-better-table-with-quill-editor-component-in
+
+9. https://www.npmjs.com/package/ngx-quill

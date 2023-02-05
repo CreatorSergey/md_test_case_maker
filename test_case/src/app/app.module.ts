@@ -14,8 +14,10 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider'
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { QuillModule } from 'ngx-quill';
+import { QuillConfigModule } from 'ngx-quill/config';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -55,7 +57,20 @@ registerLocaleData(localRu, 'ru');
     MatIconModule,
     ReactiveFormsModule,
     MatDividerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    QuillModule.forRoot({
+      modules: {
+        syntax: false,
+        toolbar: [
+          ['bold', 'italic'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ indent: '-1' }, { indent: '+1' }],
+          ['blockquote', 'code-block'],
+          ['link', 'image'],
+          ['clean'],
+        ],
+      },
+    }),
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
