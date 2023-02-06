@@ -41,6 +41,8 @@ export class CaseMakerComponent {
 
   _toggleNewPrepare = false;
   _toggleNewSteps = false;
+  _toggleEditExpect = true
+  _toggleEditNewExpect = false
 
   steps: Step[] = [];
 
@@ -62,6 +64,16 @@ export class CaseMakerComponent {
   toogleNewPrepare() {
     console.log('_toggleNewPrepare');
     this._toggleNewPrepare = !this._toggleNewPrepare;
+  }
+
+  toggleEditExpect() {
+    console.log("_toggleEditExpect")
+    this._toggleEditExpect = !this._toggleEditExpect;
+  }
+
+  toogleNewExpect() {
+    console.log('toogleNewExpect');
+    this._toggleEditNewExpect = !this._toggleEditNewExpect;
   }
 
   prepare_steps: Step[] = [];

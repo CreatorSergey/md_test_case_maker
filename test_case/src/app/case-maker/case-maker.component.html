@@ -139,7 +139,28 @@
       <app-step (someEvent)='onCreateStep($event)' [step_index]="steps.length + 1"/>
     </div>
   </div>
-  <h2>Ожидаемый результат:</h2>
+  <header class="page-header">
+    <button class="display-child-element" (click)="toggleEditExpect()" mat-icon-button aria-label="Свернуть">
+      <mat-icon>{{ _toggleEditExpect == true ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+    </button>
+    <h2 class="display-child-element">Ожидаемый результат:</h2>
+
+    <button class="display-child-element" (click)="toogleNewExpect()" mat-icon-button aria-label="Редактировать">
+      <mat-icon>create icon</mat-icon>
+    </button>
+  </header>
+
+    <div *ngIf="final_expected.length == 0 && _toggleEditExpect && _toggleEditNewExpect == false; else ExpecteTextExist">
+      <p class="final-expected-text"> Ожидаемого результата нет</p>
+    </div>
+
+  <ng-template #ExpecteTextExist>
+    <div *ngIf="_toggleEditNewExpect == false">
+      <p class="final-expected-text-has"> {{ final_expected }}</p>
+    </div>
+  </ng-template>
+
+  <div *ngIf="_toggleEditNewExpect == true && _toggleEditExpect">
   <div [formGroup]="form">
     <quill-editor class="editor-container"
     [(ngModel)]="editorContent"
@@ -153,4 +174,5 @@
     >
     </quill-editor>
   </div>
+  </div>  
 </div>
