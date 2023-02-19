@@ -41,6 +41,7 @@
 }
 
 .product-select {
+  margin-left: 20pt;
   max-width: 180px;
 }
 
@@ -79,4 +80,11 @@
   margin-left: 20pt;
   text-align: left;
   font-size: medium;
-}  
+}
+
+.header {
+  font-size: x-large;
+  font-weight: bold;
+  text-align: left;
+  vertical-align: baseline;
+}

@@ -19,6 +19,7 @@ import {
   EditorChangeContent,
   EditorChangeSelection,
 } from 'ngx-quill';
+import { NgPlural } from '@angular/common';
 @Component({
   selector: 'app-case-maker',
   templateUrl: './case-maker.component.html',
@@ -32,8 +33,10 @@ export class CaseMakerComponent {
   product: string = this.products[1];
   component: string = this.components[0];
   priority: string = this.priorities[1];
+  task: string = '';
   name = '';
   final_expected = '';
+  final_expected_text = '';
   myForm!: FormGroup;
 
   _togglePrepare = true;
@@ -41,8 +44,8 @@ export class CaseMakerComponent {
 
   _toggleNewPrepare = false;
   _toggleNewSteps = false;
-  _toggleEditExpect = true
-  _toggleEditNewExpect = false
+  _toggleEditExpect = true;
+  _toggleEditNewExpect = false;
 
   steps: Step[] = [];
 
@@ -67,13 +70,14 @@ export class CaseMakerComponent {
   }
 
   toggleEditExpect() {
-    console.log("_toggleEditExpect")
+    console.log('_toggleEditExpect');
     this._toggleEditExpect = !this._toggleEditExpect;
   }
 
   toogleNewExpect() {
     console.log('toogleNewExpect');
     this._toggleEditNewExpect = !this._toggleEditNewExpect;
+    this.editorContent = this.final_expected;
   }
 
   prepare_steps: Step[] = [];
@@ -172,11 +176,16 @@ export class CaseMakerComponent {
   save(): void {
     console.log(this.editorContent);
 
+    var text = this.parseHtmlToMarkdown(this.final_expected);
+    this.final_expected_text = text;
     const output = mustache.render(
       '# {{name}}\r\n' +
         '## Продукт: {{ product }} \r\n' +
-        '## Компонент: {{component}}\r\n' +
-        '## Приоритет: {{priority}}\r\n',
+        '## Компонент: {{ component }}\r\n' +
+        '## Приоритет: {{ priority }}\r\n' +
+        '## Задача: [{{{ task }}}]({{{ task }}})\r\n' +
+        '## Ожидаемый результат:\r\n {{{ final_expected_text }}}\r\n',
+
       this
     );
 
@@ -202,9 +211,111 @@ export class CaseMakerComponent {
     console.log(data);
   }
 
+  public saveExpected(): void {
+    this.final_expected = this.editorContent;
+    if (this.final_expected == undefined) this.final_expected = '';
+    this._toggleEditNewExpect = false;
+  }
+  public cancelExpected(): void {
+    console.log('cancelExpected');
+    this._toggleEditNewExpect = false;
+    this.editorContent = '';
+  }
+
   public changedEditor(
     event: EditorChangeContent | EditorChangeSelection
   ): void {
     console.log('editor-change', event);
+  }
+
+  private parseHtmlToMarkdown(html: string): string {
+    if (!html) {
+      return '';
+    }
+
+    let markdown = html;
+
+    markdown = markdown.replace(/<h1>/g, '# ').replace(/<\/h1>/g, '');
+    markdown = markdown.replace(/<h2>/g, '## ').replace(/<\/h1>/g, '');
+    markdown = markdown.replace(/<h3>/g, '### ').replace(/<\/h1>/g, '');
+    markdown = markdown.replace(/<h4>/g, '#### ').replace(/<\/h1>/g, '');
+    markdown = this.parseAll(markdown, 'strong', '**');
+    markdown = this.parseAll(markdown, 'em', '*');
+    markdown = this.parseAll(markdown, 's', '~~');
+    markdown = markdown.replace(/<p><br><\/p>/g, '\n');
+    markdown = markdown.replace(/<p>/g, '').replace(/<\/p>/g, '  \n');
+    markdown = markdown
+      .replace(/<blockquote>/g, '> ')
+      .replace(/<\/blockquote>/g, '');
+
+    markdown = this.parseList(markdown, 'ol', '1.');
+    markdown = this.parseList(markdown, 'ul', '-');
+
+    // todo: Umbrüche optimieren
+    // todo: alle überflüssigen tags rausschmeißen
+    // todo: links parsen
+    // const allATags = markdown.match(/<a.+?<\/a>/g) || [];
+
+    console.log(markdown);
+    return markdown;
+  }
+
+  private parseAll(html: string, htmlTag: string, markdownEquivalent: string) {
+    const regEx = new RegExp(`<\/?${htmlTag}>`, 'g');
+    return html.replace(regEx, markdownEquivalent);
+  }
+
+  private htmlToElements(html: RegExpMatchArray | null) {
+    var template = document.createElement('template');
+    if (html) template.innerHTML = html.toString();
+    return template.content.childNodes;
+  }
+
+  private parseList(
+    html: string,
+    listType: 'ol' | 'ul',
+    identifier: string
+  ): string {
+    let parsedHtml = html;
+
+    const getNextListRegEx = new RegExp(`<${listType}>.+?<\/${listType}>`);
+
+    while (parsedHtml.match(getNextListRegEx) !== null) {
+      const matchedList = parsedHtml.match(getNextListRegEx);
+
+      console.log('matchedList', matchedList);
+
+      const elements = this.htmlToElements(matchedList);
+      const listItems: Array<string> = [];
+
+      elements[0].childNodes.forEach((listItem) => {
+        let parsedListItem = `${identifier} ${listItem.textContent}`;
+
+        // get level of item to add spaces
+        // @ts-ignore
+        const className = listItem.className;
+        if (className) {
+          const splittedClassName = className.split('-');
+          const numberOfLevel = parseInt(
+            splittedClassName[splittedClassName.length - 1] || 0
+          );
+
+          for (let i = 0; i < numberOfLevel; i++) {
+            parsedListItem = `   ${parsedListItem}`;
+          }
+        }
+
+        listItems.push(parsedListItem);
+      });
+
+      parsedHtml = parsedHtml.replace(
+        getNextListRegEx,
+        listItems.join('\n') + '\n\n'
+      );
+
+      console.log('after parsing one list => ', parsedHtml);
+    }
+
+    return parsedHtml;
   }
 }

@@ -23,3 +23,6 @@
 8. https://stackoverflow.com/questions/65616025/error-when-trying-to-implement-quill-better-table-with-quill-editor-component-in
 
 9. https://www.npmjs.com/package/ngx-quill
+
+10. html to markdown
+    https://stackblitz.com/edit/angular-html-to-markdown-parser?file=src%2Fapp%2Frich-text-editor%2Frich-text-editor.component.ts

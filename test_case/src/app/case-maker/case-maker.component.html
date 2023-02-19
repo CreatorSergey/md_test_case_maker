@@ -3,7 +3,8 @@
   rel="stylesheet"
 />
 <div class="example-form">
-  <h2>Новый тест-кейс</h2>
+  <div>
+  <mat-label class="header">📜 Новый тест-кейс</mat-label>
   <button
     mat-button
     color="primary"
@@ -14,6 +15,7 @@
     <mat-icon>save</mat-icon>
     Сохранить
   </button>
+</div>
 
   <mat-form-field [formGroup]="myForm" class="example-full-width">
     <mat-label>Название</mat-label>
@@ -52,9 +54,9 @@
       </div>
     </div>
   </mat-form-field>
-
-  <h2>Влияние:</h2>
-
+  <div>
+  <mat-icon>record_voice_over</mat-icon>
+  <mat-label class="header"> Влияние:</mat-label>
   <mat-form-field class="product-select">
     <mat-label>Выберите продукт</mat-label>
     <mat-select [(value)]="product">
@@ -81,10 +83,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
+</div>
   <mat-form-field class="example-full-width">
     <mat-label>Ссылка на задачу</mat-label>
-    <input matInput placeholder="https ссылка" value="" />
+    <input matInput placeholder="https ссылка" [(ngModel)]="task" />
   </mat-form-field>
   <header class="page-header">
     <button class="display-child-element" (click)="togglePrepare()" mat-icon-button aria-label="Свернуть">
@@ -150,15 +152,17 @@
     </button>
   </header>
 
-    <div *ngIf="final_expected.length == 0 && _toggleEditExpect && _toggleEditNewExpect == false; else ExpecteTextExist">
+    <div *ngIf="final_expected.length == 0 && _toggleEditExpect && _toggleEditNewExpect == false;">
       <p class="final-expected-text"> Ожидаемого результата нет</p>
     </div>
 
-  <ng-template #ExpecteTextExist>
-    <div *ngIf="_toggleEditNewExpect == false">
-      <p class="final-expected-text-has"> {{ final_expected }}</p>
+    <div *ngIf="_toggleEditNewExpect == false && final_expected.length != 0 && _toggleEditExpect == true">
+      <quill-view-html
+        class="step-expected"
+        [content]="final_expected"
+        theme="snow"
+      ></quill-view-html>
     </div>
-  </ng-template>
 
   <div *ngIf="_toggleEditNewExpect == true && _toggleEditExpect">
   <div [formGroup]="form">
@@ -173,6 +177,25 @@
     (onEditorChanged)="changedEditor($event)"
     >
     </quill-editor>
+      <button
+    mat-button
+    color="primary"
+    class="save-button"
+    (click)="cancelExpected()"
+  >
+    <mat-icon>cancel</mat-icon>
+    Отмена
+  </button>
   </div>
+    <button
+    mat-button
+    color="primary"
+    class="save-button"
+    (click)="saveExpected()"
+  >
+    <mat-icon>done</mat-icon>
+    Добавить
+  </button>
+
   </div>  
 </div>
